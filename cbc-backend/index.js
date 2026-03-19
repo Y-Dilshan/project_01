@@ -1,10 +1,12 @@
 import express from "express";
 import mongoose from "mongoose";
+import bodyParser from "body-parser";
 
 const app = express();
 
 // Middleware
 app.use(express.json());
+app.use(bodyParser.json());
 
 // MongoDB Connection
 const mongoUrl = "mongodb+srv://admin:123@cluster0.v1bzlcn.mongodb.net/testDB?retryWrites=true&w=majority";
