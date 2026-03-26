@@ -2,11 +2,14 @@ import express from 'express';
 
 let app =express();
 
-app.get("/", ()=>{
+app.use(express.json());
+
+app.get("/", (req, res)=>{
+    console.log(req.body)
     console.log("Get request recieved")
 })
 
-app.post("/", ()=>{
+app.post("/", (req, res)=>{
     console.log("Get request recieved")
 })
 
