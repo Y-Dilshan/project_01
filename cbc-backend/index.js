@@ -1,5 +1,7 @@
 import express from "express";
 
+let mongodbUrl = "mongodb+srv://admin:123@cluster0.v1bzlcn.mongodb.net/?appName=Cluster0";
+
 const app = express();
 
 // Middleware (IMPORTANT for JSON body parsing)
