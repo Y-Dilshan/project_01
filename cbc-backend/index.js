@@ -1,20 +1,55 @@
-import express from 'express';
+import express from "express";
 
-let app =express();
+const app = express();
 
+// Middleware (IMPORTANT for JSON body parsing)
 app.use(express.json());
 
-app.get("/", (req, res)=>{
-    console.log(req.body)
-    console.log("Get request recieved")
-})
+// GET → use query params
+app.get("/", (req, res) => {
+    const name = req.body.name;
 
-app.post("/", (req, res)=>{
-    console.log("Get request recieved")
-})
+    console.log("GET name:", name);
 
-app.listen(5000, 
-    ()=> {
-        console.log("Server is running")
-    }
-);
+    res.json({
+        message: name ? "Hello World " + name : "Hello World"
+    });
+});
+
+// POST → use JSON body
+app.post("/", (req, res) => {
+    const name = req.body.name;
+
+    console.log("POST name:", name);
+
+    res.json({
+        message: name ? "Hello World " + name : "Name not provided"
+    });
+});
+
+// DELETE → use JSON body
+app.delete("/", (req, res) => {
+    const name = req.body.name;
+
+    console.log("DELETE name:", name);
+
+    res.json({
+        message: name ? "Deleted " + name : "Name not provided"
+    });
+});
+
+// PUT → use JSON body
+app.put("/", (req, res) => {
+    const name = req.body.name;
+
+    console.log("PUT name:", name);
+
+    res.json({
+        message: name ? "Updated " + name : "Name not provided"
+    });
+});
+
+// Start server
+app.listen(5000, () => {
+    console.log("Server is running on port 5000");
+});
