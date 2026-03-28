@@ -17,13 +17,11 @@ app.use(express.json());
 
 // GET → use query params
 app.get("/", (req, res) => {
-    const name = req.body.name;
-
-    console.log("GET name:", name);
-
-    res.json({
-        message: name ? "Hello World " + name : "Hello World"
-    });
+    Student.find().then(
+    (student)=>{
+        res.json(student);
+    }
+    )
 });
 
 // POST → use JSON body
@@ -31,7 +29,13 @@ app.post("/", (req, res) => {
     console.log(req.body);
 
     const student = new Student(req.body);
-    student.save()
+    student.save().then(
+        ()=>{
+            res.json({
+                message : "Student saved successfully"
+            })
+        }
+    )
 });
 
 // DELETE → use JSON body
