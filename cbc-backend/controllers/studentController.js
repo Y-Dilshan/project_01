@@ -30,3 +30,5 @@ function updateUser(req, res){
         message: "PUT request received" + req.body.name
     });
 }
+
+export { createUser, getAllUsers, deleteUser, updateUser };

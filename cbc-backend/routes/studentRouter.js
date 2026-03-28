@@ -1,38 +1,16 @@
 import express from "express";
 import Student from "../models/student.js";
+import { createUser, getAllUsers, deleteUser, updateUser } from "../controllers/studentController.js";
 
 const studentRouter = express.Router();
 
-studentRouter.get("/", (req, res) => {
-    Student.find().then(
-    (student)=>{
-        res.json(student);
-    }
-    )
-});
+studentRouter.get("/", createUser);
 
-studentRouter.post("/", (req, res) => {
-    const student = new Student(req.body);
-    student.save().then(
-        ()=>{
-            res.json({
-                message : "Student saved successfully"
-            })
-        }
-    )
-});
+studentRouter.post("/", getAllUsers);
 
-studentRouter.delete("/", (req, res) => {
-    res.json({
-        message: "DELETE request received"
-    });
-});
+studentRouter.delete("/", deleteUser);
 
-studentRouter.put("/", (req, res) => {
-    res.json({
-        message: "PUT request received" + req.body.name
-    })
-});
+studentRouter.put("/", updateUser);
 
 
 export default studentRouter;
