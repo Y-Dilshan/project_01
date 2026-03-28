@@ -1,3 +1,5 @@
+import Student from "../models/student.js";
+
 function createUser(req, res){
     const student = new Student(req.body);
     student.save().then(
