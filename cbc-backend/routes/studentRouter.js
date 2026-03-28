@@ -33,3 +33,6 @@ studentRouter.put("/", (req, res) => {
         message: "PUT request received" + req.body.name
     });
 });
+
+
+export default studentRouter;
