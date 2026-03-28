@@ -1,6 +1,13 @@
 import express from "express";
+import mongoose from "mongoose";
 
-let mongodbUrl = "mongodb+srv://admin:123@cluster0.v1bzlcn.mongodb.net/?appName=Cluster0";
+const mongodbUrl = "mongodb+srv://admin:123@cluster0.v1bzlcn.mongodb.net/?appName=Cluster0";
+
+mongoose.connect(mongodbUrl).then(
+    () =>{
+        console.log("Connected to MongoDB Cluster");
+    }
+)
 
 const app = express();
 

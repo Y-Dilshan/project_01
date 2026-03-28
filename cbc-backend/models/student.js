@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
-const studentSchema =  mongoose.Schema({
+const studentSchema = new mongoose.Schema({
     name: String,
     age: Number,
-    gender: String
+    email: String
 });
 
 const Student = mongoose.model("Student", studentSchema);
