@@ -1,7 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
+import Student from "./models/student.js";
 
-const mongodbUrl = "mongodb+srv://admin:123@cluster0.v1bzlcn.mongodb.net/?appName=Cluster0";
+const mongodbUrl = "mongodb+srv://admin:123@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(mongodbUrl).then(
     () =>{
@@ -27,13 +28,10 @@ app.get("/", (req, res) => {
 
 // POST → use JSON body
 app.post("/", (req, res) => {
-    const name = req.body.name;
+    console.log(req.body);
 
-    console.log("POST name:", name);
-
-    res.json({
-        message: name ? "Hello World " + name : "Name not provided"
-    });
+    const student = new Student(req.body);
+    student.save()
 });
 
 // DELETE → use JSON body
