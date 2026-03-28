@@ -31,7 +31,7 @@ studentRouter.delete("/", (req, res) => {
 studentRouter.put("/", (req, res) => {
     res.json({
         message: "PUT request received" + req.body.name
-    });
+    })
 });
 
 
