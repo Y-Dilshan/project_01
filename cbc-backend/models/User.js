@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 
-const studentSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
     email : {
         type : String,
         required : true,
@@ -22,5 +22,21 @@ const studentSchema = new mongoose.Schema({
         type : String,
         default : "customer"
     },
-    
+    isBlocked : {
+        type : Boolean,
+        default : false
+    },
+    isEmailVerified : {
+        type : Boolean,
+        default : false
+    },
+    image : {
+        type : String,
+        required : true,
+        default : "default.jpg"
+    }
 });
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
