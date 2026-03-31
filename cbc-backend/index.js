@@ -1,6 +1,7 @@
 import express from "express";
 import mongoose from "mongoose";
 import StudentRouter from "./routes/studentRouter.js";
+import userRouter from "./routes/userRouter.js";
 
 const mongodbUrl = "mongodb+srv://admin:123@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
 
@@ -16,6 +17,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/student", StudentRouter);
+app.use("/users", userRouter);
 
 // Start server
 app.listen(5000, () => {

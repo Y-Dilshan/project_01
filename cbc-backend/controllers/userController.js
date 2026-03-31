@@ -1,4 +1,4 @@
-import User from "../models/userModel.js";
+import User from '../models/User.js';
 
 function createUser(req, res){
     const user = new User(req.body);
@@ -10,3 +10,5 @@ function createUser(req, res){
         }
     )
 }
+
+export default createUser;
