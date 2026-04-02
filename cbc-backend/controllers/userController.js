@@ -38,9 +38,20 @@ function loginUser(req, res){
             } else {
                 const user = users[0];
                 res.json(user);
+
+                const isPasswordCorrect = bcrypt.compareSync(password, user.password);
+
+                if(isPasswordCorrect){
+                    res.json({
+                        message : "Login successful"
+                    })
+                } else {
+                    res.json({
+                        message : "Incorrect password"
+                    })
             }
         }
-    )
+})
 }
 
 export { createUser, loginUser };
