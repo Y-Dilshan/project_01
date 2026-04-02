@@ -42,6 +42,16 @@ function loginUser(req, res){
                 const isPasswordCorrect = bcrypt.compareSync(password, user.password);
 
                 if(isPasswordCorrect){
+
+                    const payload = {
+                    email : user.email,
+                    firstName : user.firstName,
+                    lastName : user.lastName,
+                    role : user.role,
+                    isEmailVerified : user.isEmailVerified,
+                    image : user.image
+                }
+
                     res.json({
                         message : "Login successful"
                     })
