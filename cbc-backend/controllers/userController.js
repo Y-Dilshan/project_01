@@ -8,8 +8,6 @@ function createUser(req, res){
 
     const hashedPassword = bcrypt.hashSync(data.password, 10);
 
-    // ❌ removed extra response here
-
     const user = new User({
         email: data.email,
         firstName: data.firstName,
@@ -38,10 +36,7 @@ async function loginUser(req, res){
             message : "User not found"
         });
     } else {
-        const user = users[0]; // ✅ fixed
-
-        // ❌ removed extra response here
-        // res.json(user);
+        const user = users[0]; 
 
         const isPasswordCorrect = await bcrypt.compare(password, user.password); // ✅ fixed
 

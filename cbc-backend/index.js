@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import StudentRouter from "./routes/studentRouter.js";
 import userRouter from "./routes/userRouter.js";
+import jwt from "jsonwebtoken";
 
 const mongodbUrl = "mongodb+srv://admin:123@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
 
@@ -15,6 +16,26 @@ const app = express();
 
 // Middleware (IMPORTANT for JSON body parsing)
 app.use(express.json());
+
+app.use((req, res, next)=>{
+    
+    const authorizatinHeader = req.header("Authorization");
+
+    if(authorizatinHeader != null){
+        const token = authorizatinHeader.replace("Bearer ", "");
+
+        jwt.verify(token, "secretKey96$2025",
+            (err, decoded) => {
+                if(err){
+                    console.log("Token verification failed:", err);
+                } else {
+                    req.user = decoded; // Attach decoded user info to request object
+                }       
+            }
+        );
+    }
+    next();
+})
 
 app.use("/student", StudentRouter);
 app.use("/users", userRouter);
