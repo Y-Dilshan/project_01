@@ -38,8 +38,6 @@ app.use((req, res, next)=>{
         next();
     }
 })
-
-app.use("/student", StudentRouter);
 app.use("/users", userRouter);
 
 // Start server
