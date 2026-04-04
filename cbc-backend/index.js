@@ -1,6 +1,5 @@
 import express from "express";
 import mongoose from "mongoose";
-import StudentRouter from "./routes/studentRouter.js";
 import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
 
@@ -30,7 +29,6 @@ app.use((req, res, next)=>{
                     console.log("Token verification failed:", err);
                     res.json({message: "Invalid token"});
                 } else {
-                    console.log(content);
                     req.user = content;
                     next();
                 }       
