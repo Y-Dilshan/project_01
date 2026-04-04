@@ -81,15 +81,9 @@ export { createUser, loginUser };
 
 export function isAdmin(req){
     if(req.user == null){
-        res.status(401).json({
-            message : "Unauthorized"
-        })
         return false;
     }
     if(req.user.role != "admin"){
-        res.status(403).json({
-            message : "Forbidden"
-        })
         return false;
     }
     

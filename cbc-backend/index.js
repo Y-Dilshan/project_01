@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
+import productRouter from "./routes/productRouter.js";
 
 const mongodbUrl = "mongodb+srv://admin:123@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
 
@@ -39,6 +40,7 @@ app.use((req, res, next)=>{
     }
 })
 app.use("/users", userRouter);
+app.use("/products", productRouter);
 
 // Start server
 app.listen(5000, () => {

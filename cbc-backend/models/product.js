@@ -1,8 +1,8 @@
 import mongoose from "mongoose";
 
-const productSchema = new mongoose.schemma({
+const productSchema = new mongoose.Schema({
     productID :{
-        trype : String,
+        type : String,
         required : true,
         unique : true
     },
@@ -59,7 +59,7 @@ const productSchema = new mongoose.schemma({
         required : true,
         default : true
     }
-})
+});
 
 const Product = mongoose.model("Product", productSchema);
 
