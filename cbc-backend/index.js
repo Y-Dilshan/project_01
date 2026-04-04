@@ -25,16 +25,20 @@ app.use((req, res, next)=>{
         const token = authorizatinHeader.replace("Bearer ", "");
 
         jwt.verify(token, "secretKey96$2025",
-            (err, decoded) => {
-                if(err){
+            (err, content) => {
+                if(content == null){
                     console.log("Token verification failed:", err);
+                    res.json({message: "Invalid token"});
                 } else {
-                    req.user = decoded; // Attach decoded user info to request object
+                    console.log(content);
+                    req.user = content;
+                    next();
                 }       
             }
         );
+    } else {
+        next();
     }
-    next();
 })
 
 app.use("/student", StudentRouter);

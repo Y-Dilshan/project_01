@@ -4,6 +4,17 @@ import jwt from 'jsonwebtoken';
 
 function createUser(req, res){
 
+    if(req.user == null){
+        res.json({
+            message : "Can not find user please try again"
+        })
+    }
+    if(req.user.role != "admin"){
+        res.json({
+            message : "Only admin can create user"
+        })
+    }
+
     const data = req.body;
 
     const hashedPassword = bcrypt.hashSync(data.password, 10);
@@ -51,7 +62,7 @@ async function loginUser(req, res){
                 image : user.image
             };
 
-            const token = jwt.sign(payload, "secretKey96$2025");
+            const token = jwt.sign(payload, "secretKey96$2025", { expiresIn: "2h" });
 
             return res.json({
                 message : "Login successful",
