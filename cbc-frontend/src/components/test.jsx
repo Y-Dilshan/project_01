@@ -17,6 +17,8 @@ export default function Test() {
                     setCount(count + 1)
                 }}>Increment</button>
             </div>
+
+            <span className = "w-[30px] h-[30px] text-2xl font-bold">Off </span>
         </div>
     )
 }
