@@ -1,16 +1,21 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css';
-import Test from './components/test.jsx';
+import homePage from './Pages/homePage.jsx';
+import loginPage from './Pages/loginPage.jsx';
+import registerPage from './Pages/registerPage.jsx';
+import adminPage from './Pages/adminPage.jsx';
 import { BrowserRouter } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-      <div classname = "w-full h-[600px] bg-red-500">
-        
+      <div className = "w-full h-screen bg-red-500">
+        <Routes path = "/">
+          <Route path = "/home" element = {homePage} />
+          <Route path = "/login" element = {loginPage} />
+          <Route path = "/register" element = {registerPage} />
+          <Route path = "/admin" element = {adminPage} />
+        </Routes>
       </div>
     </BrowserRouter>
   );

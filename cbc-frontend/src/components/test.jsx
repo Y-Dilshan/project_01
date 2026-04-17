@@ -6,7 +6,7 @@ export default function Test() {
 
     return (
         <div className="w-full h-screen flex items-center justify-center">
-            <div className="w-[400px] h-[300px] shadow-2xl flex items-center justify-center">
+            <div className="w-[400px] h-[300px] shadow-2xl flex items-center justify-center bg-white">
                 <button className="w-[100px] h-[50px] bg-blue-500 text-white" onClick = {()=>{
                     setCount(count - 1)
                 }}>Decrement</button>
@@ -17,8 +17,6 @@ export default function Test() {
                     setCount(count + 1)
                 }}>Increment</button>
             </div>
-
-            <span className = "w-[30px] h-[30px] text-2xl font-bold">Off </span>
         </div>
     )
 }
