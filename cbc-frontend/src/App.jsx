@@ -1,24 +1,24 @@
 import './App.css';
-import homePage from './Pages/homePage.jsx';
-import loginPage from './Pages/loginPage.jsx';
-import registerPage from './Pages/registerPage.jsx';
-import adminPage from './Pages/adminPage.jsx';
-import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route } from 'react-router-dom';
+import HomePage from './Pages/homePage.jsx';
+import LoginPage from './Pages/loginPage.jsx';
+import RegisterPage from './Pages/registerPage.jsx';
+import AdminPage from './Pages/adminPage.jsx';
+
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <BrowserRouter>
-      <div className = "w-full h-screen bg-red-500">
-        <Routes path = "/">
-          <Route path = "/home" element = {homePage} />
-          <Route path = "/login" element = {loginPage} />
-          <Route path = "/register" element = {registerPage} />
-          <Route path = "/admin" element = {adminPage} />
+      <div className="w-full h-screen bg-red-500">
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/admin" element={<AdminPage />} />
         </Routes>
       </div>
     </BrowserRouter>
   );
 }
 
-export default App
+export default App;

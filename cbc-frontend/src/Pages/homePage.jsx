@@ -1,5 +1,9 @@
-export default function homePage() {
+import Header from "../components/header.jsx";
+
+export default function HomePage() {
     return (
-        <h1>Home Page</h1>
-    )
+            <div className = "w-full h-full bg-gray-200" >
+                <Header />
+            </div>
+    );
 }
