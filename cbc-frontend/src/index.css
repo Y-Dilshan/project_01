@@ -5,3 +5,26 @@
     --color-secondary: #111827;
     --color-accent: #27302b;
 }
+
+@layer base {
+  /* Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #3b82f6 #f3f4f6; /* thumb track */
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  *::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    @apply bg-blue-500 rounded-full;
+  }
+}
+
+@tailwind utilities;
