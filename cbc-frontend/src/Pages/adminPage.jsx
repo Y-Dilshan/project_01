@@ -1,4 +1,8 @@
 import {Routes, Route, Link} from 'react-router-dom';
+import { LuClipboardList } from "react-icons/lu";
+import { LuBoxes } from "react-icons/lu";
+import { FaRegUser } from "react-icons/fa";
+import { MdOutlineReviews } from "react-icons/md";
 
 export default function AdminPage() {
   return (
@@ -9,13 +13,12 @@ export default function AdminPage() {
             <h1 className = "text-2xl">Admin</h1>
         </div>
         <div className="w-full h-[400px] text-white text-2xl flex flex-col">
-            <Link to="/admin">Orders</Link>
-            <Link to="/admin/products">Products</Link>
-            <Link to="/admin/users">Users</Link>
-            <Link to="/admin/reviews">Reviews</Link>
+            <Link to="/admin" className="w-full flex h-[50px] gap-[10px] items-center "> <LuClipboardList /> Orders</Link>
+            <Link to="/admin/products" className="w-full flex h-[50px] gap-[10px] items-center r"> <LuBoxes />Products</Link>
+            <Link to="/admin/users" className="w-full flex h-[50px] gap-[10px] items-center "> <FaRegUser /> Users</Link>
+            <Link to="/admin/reviews" className="w-full flex h-[50px] gap-[10px] items-center "> <MdOutlineReviews /> Reviews</Link>
         </div>
       </div>
-
       <div className="w-[calc(100%-300px)] h-full border-[10px] border-accent rounded-2xl bg-primary">
         <Routes>
             <Route path = "/" element = {<h1>Orders</h1>}/>
