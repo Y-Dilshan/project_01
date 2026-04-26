@@ -4,7 +4,7 @@ import userRouter from "./routes/userRouter.js";
 import jwt from "jsonwebtoken";
 import productRouter from "./routes/productRouter.js";
 
-const mongodbUrl = "mongodb+srv://admin:123@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
+const mongodbUrl = "mongodb+srv://admin:Shan1030@cluster0.vs773oh.mongodb.net/?appName=Cluster0";
 
 mongoose.connect(mongodbUrl).then(
     () =>{
@@ -14,7 +14,8 @@ mongoose.connect(mongodbUrl).then(
 
 const app = express();
 
-// Middleware (IMPORTANT for JSON body parsing)
+app.use(cors());
+
 app.use(express.json());
 
 app.use((req, res, next)=>{
