@@ -9,6 +9,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   return (
     <BrowserRouter>
+    <Toaster position="top-right" />
       <div className="w-full h-screen bg-primary text-secondary">
         <Routes>
           <Route path="/*" element={<HomePage />} />
