@@ -1,24 +1,33 @@
 import { Link } from "react-router-dom";
 import { useState } from "react"; 
 import axios from "axios";
-import { Toaster } from "react-hot-toast";
+import { Toaster, toast } from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
      async function login(){
         console.log("Email: ", email);
         console.log("Password: ", password);
 
         try{
-            const res = await axios.post(import.meta.env.VITE_BACKEND_URL + "/users/login", {
+            const res = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/users/login`, {
             email : email,
             password : password
         });
 
-        console.log("Login successful: ", res.data); 
+        localStorage.setItem("token", res.data.token); 
+
+        if(res.data?.role === "Admin"){
+                //window.location.href = "/admin";
+                navigate("/admin");
+            }else{
+                //window.location.href = "/";
+                navigate("/");}
 
         toast.success("Login successful! Welcome back.");
         
@@ -56,7 +65,7 @@ export default function LoginPage() {
                     />
                     
                     <input 
-                        onChange={(e) => setPassword(e.target.value)}  // ✅ fixed typo
+                        onChange={(e) => setPassword(e.target.value)} 
                         type="password" 
                         placeholder="Enter Your Password" 
                         className="bg-transparent w-[350px] h-[50px] mb-[20px] rounded-lg border border-accent text-[20px] placeholder:text-white text-white focus:outline-none focus:ring-2 focus:ring-gold p-[10px]" 
