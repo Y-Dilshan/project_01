@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import { BiPlus } from "react-icons/bi";
 
 export default function AdminProductPage() {
