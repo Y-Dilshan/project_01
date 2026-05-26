@@ -1,12 +1,19 @@
-import express from "express";
-import { createProduct, deleteProduct, getAllProducts, updateProduct, getPrtoductByID } from "../controllers/productController.js";
+import express from "express"
+import { createProduct,getAllProducts,deleteProduct,updateProduct,getProductById, searchProducts } from "../controllers/productControllers.js"
 
-const productRouter = express.Router();
 
-productRouter.get('/', getAllProducts);
-productRouter.post('/', createProduct);
-productRouter.delete('/:productID', deleteProduct); 
-productRouter.put('/:productID', updateProduct);
-productRouter.get('/:productID', getPrtoductByID);
+const productRouter = express.Router()
 
-export default productRouter;
+productRouter.get("/",getAllProducts)
+productRouter.get("/search/:query",searchProducts)
+productRouter.get("/:productId",getProductById)
+productRouter.post("/",createProduct)
+productRouter.delete("/:productId",deleteProduct)
+productRouter.put("/:productId",updateProduct)
+
+//normally we should not use json request for send small amount of data like deleted product id
+//so that id attach to request url
+//:products means, anything after / in url store in productId variable
+
+
+export default productRouter

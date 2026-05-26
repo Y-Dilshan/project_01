@@ -1,46 +1,80 @@
 import express from "express";
 import mongoose from "mongoose";
-import userRouter from "./routes/userRouter.js";
+import userRouter from "./routes/userRoutes.js";
 import jwt from "jsonwebtoken";
-import productRouter from "./routes/productRouter.js";
-import cors from "cors";
-import dotenv from "dotenv";
-dotenv.config();
+import productRouter from "./routes/productRouter.js"
+import cors from "cors"
+import dotenv from "dotenv"
+import orderRouter from "./routes/orderRouter.js";
 
-const mongodbUrl = process.env.MONGO_URL;
+dotenv.config() //use data inside the environment varable file
 
-const app = express();
+//connect to mongodb database 
+const mongodbUrl = process.env.MONGO_URL
 
-app.use(cors());
+mongoose.connect(mongodbUrl).then(
+    ()=>{
+        console.log("connected to mongodb");
+    }
+).catch(err => console.log("mongo err",err));
 
-app.use(express.json());
 
-app.use((req, res, next)=>{
+const app = express()
+const port = 3000
+
+app.use(cors()) //to avoid blocking api calls 
+
+app.use(express.json())
+
+
+
+
+//middlewear that use to send user request to relevent routers
+//catch the request, then read the token that come with request and include token details inside the request and pass the request
+app.use((req,res,next)=>{
+    const authorizationHeader = req.header("Authorization")//take the authorization header from the headers in request 
+    //authorization header contain the token
     
-    const authorizatinHeader = req.header("Authorization");
-
-    if(authorizatinHeader != null){
-        const token = authorizatinHeader.replace("Bearer ", "");
-
-        jwt.verify(token, process.env.JWT_SECRET,
-            (err, content) => {
-                if(content == null){
-                    console.log("Token verification failed:", err);
-                    res.json({message: "Invalid token"});
-                } else {
-                    req.user = content;
-                    next();
-                }       
+    //if there is token, remove the Bearer part
+    if (authorizationHeader!=null){
+        const token = authorizationHeader.replace("Bearer ","")   
+        jwt.verify(token,process.env.JWT_KEY,(error,content)=>{  //verify the token and get the content in the token
+            
+            if (content==null){
+                console.log("invalid access")
+                res.status(401).json({
+                    message: "invalid token"
+                })
+                return  //if token is invalid, return...otherwise else part and next() will execute
             }
-        );
-    } else {
-        next();
+            else{
+                console.log(content)
+                req.user = content //if there is content in the token, include that content in req.user
+                next()  //pass the request now, which contain the details in the token
+            }
+            
+        })
+    }
+    else{
+        next()// if there is no token, pass the request because it's a new sign up request 
     }
 })
-app.use("/api/users", userRouter);
-app.use("/api/products", productRouter);
 
-// Start server
-app.listen(5000, () => {
-    console.log("Server is running on port 5000");
+
+
+
+
+
+app.use("/api/users",userRouter)
+app.use("/api/products",productRouter)
+app.use("/api/orders",orderRouter)
+
+
+
+
+app.listen(port,()=>{
+    console.log("server is running");
 });
+
+
+//later create cart in backend
